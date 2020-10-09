@@ -1,7 +1,3 @@
--- http://www.adp-gmbh.ch/ora/misc/find_trace_file.html
---
--- Compare with -> tracefile.sql
---
 select 
   u_dump.value   || '/'     || 
   db_name.value  || '_ora_' || 
@@ -15,6 +11,6 @@ from
         join v$session 
           on v$process.addr = v$session.paddr
 where 
- u_dump.name   = 'user_dump_dest' and 
- db_name.name  = 'db_name'        and
- v$session.audsid=sys_context('userenv','sessionid');
+  u_dump.name   = 'user_dump_dest' and 
+  db_name.name  = 'db_name'        and
+  v$session.audsid=sys_context('userenv','sessionid');
