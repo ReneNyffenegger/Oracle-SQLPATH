@@ -10,8 +10,9 @@ with ses_sql as (
   select 
     ses.sid,
     ses.serial#,
-    ses.username,
-    ses.osuser,
+    substrb(ses.username, 1, 30) username,
+    substrb(ses.osuser  , 1, 30) osuser,
+    substrb(ses.program , 1, 30) program,
     ses.logon_time,
     sql.sql_text,
     sql.sql_id,
@@ -32,6 +33,7 @@ select
   case when new_session = 1 then serial#           end serial#,
   case when new_session = 1 then username          end username,
   case when new_session = 1 then osuser            end osuser,
+  case when new_session = 1 then program           end program,
   case when new_session = 1 then logon_time        end logon_time_,
   case when new_session = 1 then sql_id            end sql_id,        -- In order to see sql text with newlines, use this ID in combination with -> sqlid.sql
   sql_text,
