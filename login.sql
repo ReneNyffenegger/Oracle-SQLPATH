@@ -10,6 +10,7 @@ set sqlblanklines     on
 set exitcommit       off
 
 define _editor=gvim
+-- define _editor=notepad
 
 alter session set nls_date_format      = 'yyyy-mm-dd hh24:mi:ss';
 alter session set nls_language         = 'english';
@@ -20,11 +21,18 @@ set termout off
 define sqlprompt=none
 column sqlprompt new_value sqlprompt
 
-select lower(sys_context('USERENV','CURRENT_USER')) || '@' || sys_context('USERENV','DB_NAME') as sqlprompt from dual;
+select
+   lower(sys_context('USERENV','CURRENT_USER')) || '@' ||
+-- sys_context('USERENV','DB_NAME'     )
+   sys_context('USERENV','SERVICE_NAME')
+as
+   sqlprompt
+from
+   dual;
 
 set sqlprompt '&sqlprompt> '
 undefine sqlprompt
 set termout on
 -- }
 
-set editfile c:\temp\sqlplus.sql
+set editfile %temp%\sqlplus.sql
