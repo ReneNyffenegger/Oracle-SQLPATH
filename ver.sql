@@ -1,1 +1,1 @@
-select * from v$version;
+select banner_full from v$version;
