@@ -12,4 +12,3 @@ set termout off
 set lines 500
 set pages 0
 spool &1
-
