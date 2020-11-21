@@ -1,6 +1,7 @@
 set tab off
 set verify off
-@spool c:\temp\insert_statements.sql
+@spool %temp%\insert_statements.sql
+
 declare
 --
 --     Create SQL statements from real data.
@@ -44,7 +45,7 @@ stmt_txt varchar2(32000) := q'!  select * from !' || table_name  ||
 
           column_.name         :=  table_desc_(c).col_name;
 
-          column_.datatype     :=  case table_desc_(c).col_type 
+          column_.datatype     :=  case table_desc_(c).col_type
                                    when dbms_sql.number_type   then 'N'
                                    when dbms_sql.date_type     then 'D'
                                    when dbms_sql.varchar2_type then 'C'
@@ -78,7 +79,7 @@ stmt_txt varchar2(32000) := q'!  select * from !' || table_name  ||
               else
 
                      if     columns_(c).datatype = 'D' then
-                     
+
                             dbms_output.put_line('to_date(''' || column_value || ''', ''dd.mm.yyyy hh24:mi:ss'');');
 
                      elsif  columns_(c).datatype = 'C' then
@@ -126,7 +127,8 @@ begin
 
   dbms_output.put_line('end;');
   dbms_output.put_line('/');
-  
+
 end;
 /
+
 @spool_off
