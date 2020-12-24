@@ -1,13 +1,25 @@
-set tab off
+set tab    off
 set verify off
-@spool c:\temp\table_out.txt
+
+@spool table_out.txt
+
 declare
 --
 --     Create a tabular, textual output from an SQL resultset.
 --
 stmt_txt varchar2(32000) := q'!  
 
-   SELECT STATEMENT goes here
+   select
+      object_name,
+      object_id,
+      object_type,
+      created,
+      status
+   from
+      user_objects
+   where
+      object_name not like 'SYS%' and
+      rownum < 10
 
 !';
 
@@ -225,4 +237,5 @@ begin
   
 end;
 /
+
 @spool_off
