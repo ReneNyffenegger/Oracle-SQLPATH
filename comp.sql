@@ -1,6 +1,2 @@
-declare
-  compile_all boolean := false;
-begin
-  dbms_utility.compile_schema(user, true);
-end;
-/
+exec dbms_utility.compile_schema(user, compile_all => true, reuse_settings => false)
+@err
