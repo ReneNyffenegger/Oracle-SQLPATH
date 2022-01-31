@@ -15,6 +15,7 @@ define _editor=gvim
 alter session set nls_date_format      = 'yyyy-mm-dd hh24:mi:ss';
 alter session set nls_language         = 'english';
 alter session set nls_length_semantics =  char;
+alter session set plsql_warnings       = 'enable:all';
 
 --  SQL Prompt {
 set termout off
